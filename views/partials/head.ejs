@@ -14,10 +14,13 @@
   <link rel="icon" href="/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <link rel="stylesheet" href="/fonts/marcellus/400.css">
+  <link rel="stylesheet" href="/fonts/cormorant-garamond/300-italic.css">
+  <link rel="stylesheet" href="/fonts/cormorant-garamond/400-italic.css">
   <link rel="stylesheet" href="/fonts/hanken-grotesk/400.css">
   <link rel="stylesheet" href="/fonts/hanken-grotesk/500.css">
   <link rel="stylesheet" href="/fonts/hanken-grotesk/600.css">
   <link rel="stylesheet" href="/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
   <% if (locals.jsonLd) { %><script type="application/ld+json"><%- JSON.stringify(jsonLd).replace(/</g, '\\u003c') %></script><% } %>
 </head>
 <body class="<%= locals.bodyClass || '' %>">
