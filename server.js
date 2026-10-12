@@ -71,7 +71,7 @@ const visiveis = () => store.all().filter((c) => c.estado !== 'vendido');
 app.get('/', (req, res) => {
   const lista = visiveis();
   const destaque = lista.find((c) => c.destaque) || lista[0] || null;
-  const outras = lista.filter((c) => !destaque || c.id !== destaque.id).slice(0, 6);
+  const outras = lista.slice(0, 6);
   res.render('index', { destaque, outras });
 });
 
