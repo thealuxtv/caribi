@@ -1,0 +1,17 @@
+<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Caribi, página inicial">
+      <img class="brand-logo" src="/img/logo.png" alt="" width="40" height="40">
+      <span class="brand-word">Caribi</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" class="site-nav" aria-label="Principal">
+      <a href="/viaturas" <%- currentPath.startsWith('/viaturas') ? 'aria-current="page"' : '' %>>Viaturas</a>
+      <a href="/a-marca" <%- currentPath === '/a-marca' ? 'aria-current="page"' : '' %>>A marca</a>
+      <a href="/contactos" <%- currentPath === '/contactos' ? 'aria-current="page"' : '' %>>Contactos</a>
+      <a class="nav-cta" href="<%= waLink('Olá! Gostava de saber mais sobre as viaturas da Caribi.') %>" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+<main id="conteudo">

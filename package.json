@@ -1,0 +1,23 @@
+{
+  "name": "caribi-website",
+  "version": "1.0.0",
+  "description": "Website da Caribi: automóveis premium selecionados",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@fontsource/hanken-grotesk": "^5.3.0",
+    "@fontsource/marcellus": "^5.3.0",
+    "dotenv": "^18.0.7",
+    "ejs": "^7.0.1",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "multer": "^2.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true
+}

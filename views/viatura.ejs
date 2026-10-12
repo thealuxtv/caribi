@@ -1,0 +1,97 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<div class="wrap vehicle">
+  <a class="back" href="/viaturas">Voltar às viaturas</a>
+
+  <div class="vehicle-top">
+    <div class="gallery">
+      <% if (car.fotos.length) { %>
+        <div class="gallery-main">
+          <img id="gallery-main" src="/uploads/<%= car.fotos[0] %>" alt="<%= carTitle(car) %>, fotografia 1 de <%= car.fotos.length %>">
+        </div>
+        <% if (car.fotos.length > 1) { %>
+        <ul class="gallery-thumbs">
+          <% car.fotos.forEach(function (f, i) { %>
+            <li><button type="button" data-src="/uploads/<%= f %>" data-alt="<%= carTitle(car) %>, fotografia <%= i + 1 %> de <%= car.fotos.length %>" <%- i === 0 ? 'aria-current="true"' : '' %>>
+              <img src="/uploads/<%= f %>" alt="" loading="lazy"><span class="sr">Ver fotografia <%= i + 1 %></span>
+            </button></li>
+          <% }) %>
+        </ul>
+        <% } %>
+      <% } else { %>
+        <div class="gallery-main"><%- include('partials/placeholder') %></div>
+      <% } %>
+    </div>
+
+    <aside class="vehicle-summary">
+      <% if (car.estado !== 'disponivel') { %><p class="estado estado-<%= car.estado %>"><%= estadoLabel(car.estado) %></p><% } %>
+      <h1><%= carTitle(car) %></h1>
+      <% if (car.versao) { %><p class="versao"><%= car.versao %></p><% } %>
+      <p class="preco preco-lg"><%= formatPrice(car.preco) %></p>
+      <ul class="car-meta">
+        <% if (car.ano) { %><li><%= car.ano %></li><% } %>
+        <% if (car.km != null) { %><li><%= formatKm(car.km) %></li><% } %>
+        <% if (car.combustivel) { %><li><%= car.combustivel %></li><% } %>
+        <% if (car.caixa) { %><li><%= car.caixa %></li><% } %>
+      </ul>
+      <% if (car.estado !== 'vendido') { %>
+      <div class="actions stack">
+        <a class="btn btn-gold" href="<%= waLink(mensagem) %>" target="_blank" rel="noopener">Pedir informações por WhatsApp</a>
+        <a class="btn btn-line" href="tel:<%= config.telefoneLink %>">Ligar <%= config.telefone %></a>
+        <a class="btn btn-line" href="mailto:<%= config.email %>?subject=<%= encodeURIComponent(carTitle(car)) %>">Enviar email</a>
+      </div>
+      <p class="note"><%= config.horario %>.</p>
+      <% } else { %>
+      <p class="note">Esta viatura já foi vendida. Se procuras algo semelhante, <a href="/contactos">fala connosco</a>.</p>
+      <% } %>
+    </aside>
+  </div>
+
+  <section class="dossier" aria-labelledby="ficha-titulo">
+    <header class="dossier-head">
+      <img class="brand-logo" src="/img/logo.png" alt="" width="40" height="40">
+      <div>
+        <h2 id="ficha-titulo">Ficha de seleção</h2>
+        <p>O que precisas de saber sobre esta viatura, num só sítio.</p>
+      </div>
+    </header>
+
+    <dl class="specs">
+      <div><dt>Marca</dt><dd><%= car.marca %></dd></div>
+      <div><dt>Modelo</dt><dd><%= car.modelo %></dd></div>
+      <% if (car.versao) { %><div><dt>Versão</dt><dd><%= car.versao %></dd></div><% } %>
+      <div><dt>Ano</dt><dd><%= car.ano || 'A confirmar' %></dd></div>
+      <div><dt>Quilómetros</dt><dd><%= formatKm(car.km) || 'A confirmar' %></dd></div>
+      <% if (car.combustivel) { %><div><dt>Combustível</dt><dd><%= car.combustivel %></dd></div><% } %>
+      <% if (car.caixa) { %><div><dt>Caixa</dt><dd><%= car.caixa %></dd></div><% } %>
+      <% if (car.potencia) { %><div><dt>Potência</dt><dd><%= car.potencia %> cv</dd></div><% } %>
+      <% if (car.cor) { %><div><dt>Cor</dt><dd><%= car.cor %></dd></div><% } %>
+      <% if (car.portas) { %><div><dt>Portas</dt><dd><%= car.portas %></dd></div><% } %>
+      <% if (car.lugares) { %><div><dt>Lugares</dt><dd><%= car.lugares %></dd></div><% } %>
+    </dl>
+
+    <div class="dossier-body">
+      <% if (car.descricao) { %>
+      <div class="dossier-block">
+        <h3>Sobre esta viatura</h3>
+        <% car.descricao.split(/\n+/).forEach(function (p) { %><p><%= p %></p><% }) %>
+      </div>
+      <% } %>
+      <% if (car.equipamento.length) { %>
+      <div class="dossier-block">
+        <h3>Equipamento</h3>
+        <ul class="ticks"><% car.equipamento.forEach(function (e) { %><li><%= e %></li><% }) %></ul>
+      </div>
+      <% } %>
+      <% if (car.historico.length) { %>
+      <div class="dossier-block">
+        <h3>Histórico e verificações</h3>
+        <ul class="ticks"><% car.historico.forEach(function (e) { %><li><%= e %></li><% }) %></ul>
+      </div>
+      <% } %>
+    </div>
+  </section>
+</div>
+
+<%- include('partials/footer') %>

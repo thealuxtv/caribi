@@ -1,0 +1,35 @@
+<%- include('_top') %>
+<div class="section-head">
+  <h1>Viaturas</h1>
+  <a class="btn btn-gold" href="/admin/viaturas/nova">Adicionar viatura</a>
+</div>
+<% const avisos = { criada: 'Viatura publicada.', guardada: 'Alterações guardadas.', apagada: 'Viatura apagada.' } %>
+<% if (aviso && avisos[aviso]) { %><p class="notice" role="status"><%= avisos[aviso] %></p><% } %>
+
+<% if (lista.length) { %>
+<div class="table-wrap">
+<table class="admin-table">
+  <thead><tr><th scope="col">Foto</th><th scope="col">Viatura</th><th scope="col">Preço</th><th scope="col">Estado</th><th scope="col"><span class="sr">Ações</span></th></tr></thead>
+  <tbody>
+  <% lista.forEach(function (car) { %>
+    <tr>
+      <td class="thumb"><% if (car.fotos.length) { %><img src="/uploads/<%= car.fotos[0] %>" alt=""><% } else { %><span class="no-photo">Sem fotos</span><% } %></td>
+      <td><strong><%= carTitle(car) %></strong><br><span class="muted"><%= [car.versao, car.ano, formatKm(car.km)].filter(Boolean).join(', ') %></span><% if (car.destaque) { %><br><span class="pill">Em destaque</span><% } %></td>
+      <td><%= formatPrice(car.preco) %></td>
+      <td><span class="estado estado-<%= car.estado %>"><%= estadoLabel(car.estado) %></span></td>
+      <td class="row-actions">
+        <a href="/viaturas/<%= car.slug %>" target="_blank" rel="noopener">Ver</a>
+        <a href="/admin/viaturas/<%= car.id %>/editar">Editar</a>
+        <form method="post" action="/admin/viaturas/<%= car.id %>/apagar" data-confirm="Apagar <%= carTitle(car) %>? As fotografias também serão apagadas.">
+          <input type="hidden" name="_csrf" value="<%= csrf %>"><button class="link-btn danger" type="submit">Apagar</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+</div>
+<% } else { %>
+<div class="empty"><p>Ainda não há viaturas. Adiciona a primeira para aparecer no site.</p></div>
+<% } %>
+<%- include('_bottom') %>

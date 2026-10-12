@@ -1,0 +1,9 @@
+<%- include('_top') %>
+<form class="login card-panel" method="post" action="/admin/entrar">
+  <h1>Entrar na gestão</h1>
+  <% if (erro) { %><p class="alert" role="alert"><%= erro %></p><% } %>
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <label>Password<input type="password" name="password" autocomplete="current-password" required autofocus></label>
+  <button class="btn btn-gold" type="submit">Entrar</button>
+</form>
+<%- include('_bottom') %>

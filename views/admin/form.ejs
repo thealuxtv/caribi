@@ -1,0 +1,88 @@
+<%- include('_top') %>
+<a class="back" href="/admin">Voltar à lista</a>
+<h1><%= title %></h1>
+
+<% if (erros.length) { %>
+<div class="alert" role="alert"><ul><% erros.forEach(function (e) { %><li><%= e %></li><% }) %></ul></div>
+<% } %>
+
+<form class="car-form" method="post" enctype="multipart/form-data" action="<%= car.id ? `/admin/viaturas/${car.id}` : '/admin/viaturas' %>">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+
+  <fieldset>
+    <legend>Identificação</legend>
+    <div class="fields">
+      <label>Marca *<input name="marca" value="<%= car.marca || '' %>" required placeholder="Mercedes-Benz"></label>
+      <label>Modelo *<input name="modelo" value="<%= car.modelo || '' %>" required placeholder="CLA 250e Shooting Brake"></label>
+      <label>Versão<input name="versao" value="<%= car.versao || '' %>" placeholder="AMG Line"></label>
+      <label>Ano<input name="ano" type="number" min="1950" max="2100" value="<%= car.ano ?? '' %>"></label>
+      <label>Quilómetros<input name="km" type="number" min="0" step="1" value="<%= car.km ?? '' %>"></label>
+      <label>Preço (€)<input name="preco" type="number" min="0" step="1" value="<%= car.preco ?? '' %>"><small>Deixa vazio para mostrar «Preço sob consulta».</small></label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Características</legend>
+    <div class="fields">
+      <label>Combustível
+        <select name="combustivel"><option value="">—</option>
+          <% COMBUSTIVEIS.forEach(function (c) { %><option <%= car.combustivel === c ? 'selected' : '' %>><%= c %></option><% }) %>
+        </select>
+      </label>
+      <label>Caixa
+        <select name="caixa"><option value="">—</option>
+          <% CAIXAS.forEach(function (c) { %><option <%= car.caixa === c ? 'selected' : '' %>><%= c %></option><% }) %>
+        </select>
+      </label>
+      <label>Potência (cv)<input name="potencia" type="number" min="0" value="<%= car.potencia ?? '' %>"></label>
+      <label>Cor<input name="cor" value="<%= car.cor || '' %>"></label>
+      <label>Portas<input name="portas" type="number" min="0" max="9" value="<%= car.portas ?? '' %>"></label>
+      <label>Lugares<input name="lugares" type="number" min="0" max="9" value="<%= car.lugares ?? '' %>"></label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Publicação</legend>
+    <div class="fields">
+      <label>Estado
+        <select name="estado">
+          <% Object.keys(ESTADOS).forEach(function (k) { %><option value="<%= k %>" <%= car.estado === k ? 'selected' : '' %>><%= ESTADOS[k] %></option><% }) %>
+        </select>
+        <small>Viaturas vendidas deixam de aparecer na listagem, mas o link continua a funcionar.</small>
+      </label>
+      <label class="check"><input type="checkbox" name="destaque" <%= car.destaque ? 'checked' : '' %>> Mostrar em destaque na página inicial</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Descrição</legend>
+    <label>Sobre esta viatura<textarea name="descricao" rows="5"><%= car.descricao || '' %></textarea></label>
+    <div class="fields two">
+      <label>Equipamento<textarea name="equipamento" rows="8" placeholder="Um item por linha"><%= (car.equipamento || []).join('\n') %></textarea></label>
+      <label>Histórico e verificações<textarea name="historico" rows="8" placeholder="Um item por linha, por exemplo: Revisões feitas na marca"><%= (car.historico || []).join('\n') %></textarea></label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Fotografias</legend>
+    <% if (car.fotos && car.fotos.length) { %>
+    <p class="muted">Escolhe a fotografia de capa ou marca as que queres remover.</p>
+    <ul class="photo-grid">
+      <% car.fotos.forEach(function (f, i) { %>
+      <li>
+        <img src="/uploads/<%= f %>" alt="Fotografia <%= i + 1 %>">
+        <label class="check"><input type="radio" name="capa" value="<%= f %>" <%= i === 0 ? 'checked' : '' %>> Capa</label>
+        <label class="check"><input type="checkbox" name="remover" value="<%= f %>"> Remover</label>
+      </li>
+      <% }) %>
+    </ul>
+    <% } %>
+    <label>Adicionar fotografias<input type="file" name="fotos" accept="image/jpeg,image/png,image/webp,image/avif" multiple><small>JPG, PNG, WebP ou AVIF, até 12 MB cada. A primeira fica como capa se a viatura ainda não tiver fotos.</small></label>
+  </fieldset>
+
+  <div class="form-actions">
+    <button class="btn btn-gold" type="submit"><%= car.id ? 'Guardar alterações' : 'Publicar viatura' %></button>
+    <a class="btn btn-line" href="/admin">Cancelar</a>
+  </div>
+</form>
+<%- include('_bottom') %>

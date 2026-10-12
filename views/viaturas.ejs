@@ -1,0 +1,57 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<section class="page-intro">
+  <div class="wrap">
+    <h1>Viaturas</h1>
+    <p class="lead">Cada carro aqui passou pela nossa seleção. Se alguma te interessar, fala connosco para marcar uma visita.</p>
+  </div>
+</section>
+
+<section class="wrap listing">
+  <% if (total > 1) { %>
+  <form class="filters" method="get" action="/viaturas">
+    <label>Marca
+      <select name="marca">
+        <option value="">Todas</option>
+        <% marcas.forEach(function (m) { %><option <%= filtros.marca === m ? 'selected' : '' %>><%= m %></option><% }) %>
+      </select>
+    </label>
+    <label>Combustível
+      <select name="combustivel">
+        <option value="">Todos</option>
+        <% combustiveis.forEach(function (c) { %><option <%= filtros.combustivel === c ? 'selected' : '' %>><%= c %></option><% }) %>
+      </select>
+    </label>
+    <label>Ordenar por
+      <select name="ordem">
+        <option value="recentes" <%= filtros.ordem === 'recentes' ? 'selected' : '' %>>Mais recentes</option>
+        <option value="preco-asc" <%= filtros.ordem === 'preco-asc' ? 'selected' : '' %>>Preço mais baixo</option>
+        <option value="preco-desc" <%= filtros.ordem === 'preco-desc' ? 'selected' : '' %>>Preço mais alto</option>
+        <option value="km-asc" <%= filtros.ordem === 'km-asc' ? 'selected' : '' %>>Menos quilómetros</option>
+      </select>
+    </label>
+    <button class="btn btn-line" type="submit">Aplicar filtros</button>
+  </form>
+  <% } %>
+
+  <p class="count"><%= lista.length %> <%= lista.length === 1 ? 'viatura' : 'viaturas' %></p>
+
+  <% if (lista.length) { %>
+    <div class="car-grid">
+      <% lista.forEach(function (car) { %><%- include('partials/car-card', { car }) %><% }) %>
+    </div>
+  <% } else if (total) { %>
+    <div class="empty">
+      <p>Nenhuma viatura corresponde a estes filtros.</p>
+      <a class="btn btn-line" href="/viaturas">Limpar filtros</a>
+    </div>
+  <% } else { %>
+    <div class="empty">
+      <p>O stock está a ser renovado. Diz-nos o que procuras e avisamos-te quando chegar.</p>
+      <a class="btn btn-line" href="<%= waLink('Olá! Procuro uma viatura e gostava de ser avisado quando tiverem algo do género.') %>" target="_blank" rel="noopener">Dizer o que procuro</a>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

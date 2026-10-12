@@ -1,0 +1,22 @@
+<article class="car-card">
+  <a class="car-card-link" href="/viaturas/<%= car.slug %>">
+    <div class="car-card-media">
+      <% if (car.fotos && car.fotos.length) { %>
+        <img src="/uploads/<%= car.fotos[0] %>" alt="<%= carTitle(car) %>" loading="lazy">
+      <% } else { %>
+        <%- include('placeholder') %>
+      <% } %>
+      <% if (car.estado !== 'disponivel') { %><span class="estado estado-<%= car.estado %>"><%= estadoLabel(car.estado) %></span><% } %>
+    </div>
+    <div class="car-card-body">
+      <h3><%= carTitle(car) %></h3>
+      <% if (car.versao) { %><p class="versao"><%= car.versao %></p><% } %>
+      <ul class="car-meta">
+        <% if (car.ano) { %><li><%= car.ano %></li><% } %>
+        <% if (car.km != null) { %><li><%= formatKm(car.km) %></li><% } %>
+        <% if (car.combustivel) { %><li><%= car.combustivel %></li><% } %>
+      </ul>
+      <p class="preco"><%= formatPrice(car.preco) %></p>
+    </div>
+  </a>
+</article>

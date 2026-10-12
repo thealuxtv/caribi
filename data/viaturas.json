@@ -1,0 +1,26 @@
+[
+  {
+    "id": "b6f0c1e2-6d0a-4c39-9a51-2f3c8e1d7a01",
+    "marca": "Mercedes-Benz",
+    "modelo": "CLA 250e Shooting Brake",
+    "versao": "AMG Line",
+    "ano": null,
+    "km": null,
+    "preco": null,
+    "combustivel": "Híbrido plug-in",
+    "caixa": "Automática",
+    "potencia": null,
+    "cor": "Preto",
+    "portas": 5,
+    "lugares": 5,
+    "estado": "brevemente",
+    "destaque": true,
+    "descricao": "Uma carrinha compacta com o desenho mais elegante da gama, motorização híbrida plug-in e pack AMG Line. Completa esta descrição com os detalhes da viatura.",
+    "equipamento": [],
+    "historico": [],
+    "fotos": [],
+    "slug": "mercedes-benz-cla-250e-shooting-brake-amg-line",
+    "criadoEm": "2026-10-12T09:00:00.000Z",
+    "atualizadoEm": "2026-10-12T09:00:00.000Z"
+  }
+]

@@ -1,0 +1,31 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<section class="page-intro">
+  <div class="wrap">
+    <h1>Contactos</h1>
+    <p class="lead">A forma mais rápida de falar connosco é por WhatsApp. Respondemos a perguntas sobre viaturas, marcamos visitas e ajudamos-te a encontrar o carro certo.</p>
+  </div>
+</section>
+
+<section class="wrap contact-grid">
+  <a class="contact-item primary" href="<%= waLink('Olá! Gostava de saber mais sobre as viaturas da Caribi.') %>" target="_blank" rel="noopener">
+    <h2>WhatsApp</h2><p>Abrir conversa</p>
+  </a>
+  <a class="contact-item" href="tel:<%= config.telefoneLink %>">
+    <h2>Telefone</h2><p><%= config.telefone %></p>
+  </a>
+  <a class="contact-item" href="mailto:<%= config.email %>">
+    <h2>Email</h2><p><%= config.email %></p>
+  </a>
+  <a class="contact-item" href="<%= config.instagram %>" target="_blank" rel="noopener">
+    <h2>Instagram</h2><p>@caribi.portugal</p>
+  </a>
+</section>
+
+<section class="wrap contact-extra">
+  <p><strong>Zona:</strong> <%= config.zona %></p>
+  <p><strong>Visitas:</strong> <%= config.horario %></p>
+</section>
+
+<%- include('partials/footer') %>

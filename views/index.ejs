@@ -1,0 +1,82 @@
+<%- include('partials/head', { bodyClass: 'page-home' }) %>
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <h1>Not new.<br>Just better chosen.</h1>
+    <div class="hero-side">
+      <p class="lead">Automóveis premium usados, escolhidos um a um. Poucas viaturas, todas com histórico claro e estado verificado, explicadas ao detalhe antes de decidir.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="/viaturas">Ver viaturas</a>
+        <a class="btn btn-line" href="/contactos">Falar connosco</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if (destaque) { %>
+<section class="featured" aria-labelledby="destaque-titulo">
+  <div class="wrap featured-grid">
+    <a class="featured-media" href="/viaturas/<%= destaque.slug %>" tabindex="-1" aria-hidden="true">
+      <% if (destaque.fotos.length) { %>
+        <img src="/uploads/<%= destaque.fotos[0] %>" alt="">
+      <% } else { %>
+        <%- include('partials/placeholder') %>
+      <% } %>
+    </a>
+    <div class="featured-info">
+      <p class="featured-status"><%= destaque.estado === 'brevemente' ? 'Chega em breve' : 'Em destaque' %></p>
+      <h2 id="destaque-titulo"><%= carTitle(destaque) %></h2>
+      <% if (destaque.versao) { %><p class="versao"><%= destaque.versao %></p><% } %>
+      <dl class="mini-specs">
+        <% if (destaque.ano) { %><div><dt>Ano</dt><dd><%= destaque.ano %></dd></div><% } %>
+        <% if (destaque.km != null) { %><div><dt>Quilómetros</dt><dd><%= formatKm(destaque.km) %></dd></div><% } %>
+        <% if (destaque.combustivel) { %><div><dt>Combustível</dt><dd><%= destaque.combustivel %></dd></div><% } %>
+        <% if (destaque.caixa) { %><div><dt>Caixa</dt><dd><%= destaque.caixa %></dd></div><% } %>
+      </dl>
+      <p class="preco"><%= formatPrice(destaque.preco) %></p>
+      <a class="btn btn-gold" href="/viaturas/<%= destaque.slug %>">Ver viatura</a>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="process" aria-labelledby="processo-titulo">
+  <div class="wrap">
+    <h2 id="processo-titulo">Como escolhemos cada viatura</h2>
+    <ol class="steps">
+      <li><h3>Origem</h3><p>Só aceitamos viaturas com histórico de manutenção e proveniência que conseguimos confirmar.</p></li>
+      <li><h3>Inspeção</h3><p>Verificamos mecânica, eletrónica, carroçaria e interior antes de qualquer viatura entrar em stock.</p></li>
+      <li><h3>Preparação</h3><p>Tratamos do que for preciso para que o carro chegue até ti como deve estar.</p></li>
+      <li><h3>Entrega</h3><p>Explicamos tudo o que fizemos e entregamos a documentação completa.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="stock" aria-labelledby="stock-titulo">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="stock-titulo">Em stock</h2>
+      <a class="link" href="/viaturas">Ver todas as viaturas</a>
+    </div>
+    <% if (outras.length) { %>
+      <div class="car-grid">
+        <% outras.forEach(function (car) { %><%- include('partials/car-card', { car }) %><% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty">
+        <p>O stock está a ser renovado. Diz-nos o que procuras e avisamos-te quando chegar.</p>
+        <a class="btn btn-line" href="<%= waLink('Olá! Procuro uma viatura e gostava de ser avisado quando tiverem algo do género.') %>" target="_blank" rel="noopener">Dizer o que procuro</a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap cta-inner">
+    <p>Procuras um modelo específico? Conta-nos o que tens em mente.</p>
+    <a class="btn btn-gold" href="<%= waLink('Olá! Procuro um modelo específico.') %>" target="_blank" rel="noopener">Falar por WhatsApp</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,13 @@
+<%- include('../partials/head', { bodyClass: 'admin' }) %>
+<header class="admin-bar">
+  <div class="wrap admin-bar-inner">
+    <a class="brand" href="/admin"><img class="brand-logo" src="/img/logo.png" alt="" width="40" height="40"><span class="brand-word">Caribi</span><span class="admin-tag">Gestão</span></a>
+    <% if (locals.isAdmin) { %>
+    <div class="admin-nav">
+      <a href="/" target="_blank" rel="noopener">Ver site</a>
+      <form method="post" action="/admin/sair"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="link-btn" type="submit">Sair</button></form>
+    </div>
+    <% } %>
+  </div>
+</header>
+<main id="conteudo" class="wrap admin-main">
