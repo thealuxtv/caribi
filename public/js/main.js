@@ -33,6 +33,7 @@ const grupos = [
   '.steps > li', '.car-grid > .car-card', '.contact-grid > .contact-item', '.mini-specs > div',
   '.specs > div', '.dossier-body > .dossier-block', '.ticks > li', '.gallery-thumbs > li',
   '.footer-grid > div', '.footer-ral', '.cta-inner > *', '.section-head > *', '.process h2', '.process .eyebrow',
+  '.prose > *', '.quote > *', '.contact-extra > *', '.count', '.filters', '.empty > *', '.dossier-head',
 ];
 document.querySelectorAll(grupos.join(',')).forEach((el) => {
   const i = [...el.parentElement.children].indexOf(el) % 8;
@@ -40,10 +41,15 @@ document.querySelectorAll(grupos.join(',')).forEach((el) => {
   el.style.transitionDelay = `${i * 90}ms`;
 });
 const reveals = document.querySelectorAll('.reveal');
+let inicio = performance.now();
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
+        // O que já está no ecrã ao abrir a página entra depois do título
+        if (performance.now() - inicio < 600) {
+          e.target.style.transitionDelay = `${(parseInt(e.target.style.transitionDelay, 10) || 0) + 450}ms`;
+        }
         e.target.classList.add('is-in');
         io.unobserve(e.target);
         // Depois de entrar, o atraso deixa de se aplicar aos efeitos de hover
