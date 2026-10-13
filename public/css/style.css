@@ -323,6 +323,10 @@ select:focus, input:focus, textarea:focus { border-color: var(--gold); outline: 
 .hero-title, .hero-side { animation: rise 1.2s var(--ease) both; }
 .hero-side { animation-delay: .2s; }
 .hero-foot { animation: fade 1.6s var(--ease) .5s both; }
+.page-intro .wrap > *, .vehicle-top > * { animation: rise 1.2s var(--ease) both; }
+.page-intro .wrap > :nth-child(2) { animation-delay: .12s; }
+.page-intro .wrap > :nth-child(3), .vehicle-top > :nth-child(2) { animation-delay: .24s; }
+.back { animation: fade 1.2s var(--ease) both; }
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
