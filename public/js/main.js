@@ -27,12 +27,28 @@ document.querySelectorAll('form[data-confirm]').forEach((form) => {
   });
 });
 
-// Entrada suave das secções ao fazer scroll
+// Entrada suave das secções ao fazer scroll.
+// Os elementos de cada grupo entram um a um, com um pequeno atraso entre eles.
+const grupos = [
+  '.steps > li', '.car-grid > .car-card', '.contact-grid > .contact-item', '.mini-specs > div',
+  '.specs > div', '.dossier-body > .dossier-block', '.ticks > li', '.gallery-thumbs > li',
+  '.footer-grid > div', '.footer-ral', '.cta-inner > *', '.section-head > *', '.process h2', '.process .eyebrow',
+];
+document.querySelectorAll(grupos.join(',')).forEach((el) => {
+  const i = [...el.parentElement.children].indexOf(el) % 8;
+  el.classList.add('reveal');
+  el.style.transitionDelay = `${i * 90}ms`;
+});
 const reveals = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      if (e.isIntersecting) {
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+        // Depois de entrar, o atraso deixa de se aplicar aos efeitos de hover
+        setTimeout(() => { e.target.style.transitionDelay = ''; }, 1900);
+      }
     });
   }, { rootMargin: '0px 0px -10% 0px' });
   reveals.forEach((el) => io.observe(el));

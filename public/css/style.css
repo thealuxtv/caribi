@@ -317,6 +317,14 @@ select:focus, input:focus, textarea:focus { border-color: var(--gold); outline: 
 .footer-ral a { color: var(--gold-soft); }
 .footer-ral .copy { margin: 1rem 0 0; font: 500 .68rem/1 var(--body); letter-spacing: .24em; text-transform: uppercase; }
 
+/* Transição entre páginas (navegadores com View Transitions; os outros mudam de página normalmente) */
+@view-transition { navigation: auto; }
+.site-header { view-transition-name: cabecalho; }
+::view-transition-old(root) { animation: vt-out .35s var(--ease) both; }
+::view-transition-new(root) { animation: vt-in .6s var(--ease) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-8px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(12px); } }
+
 /* Entrada suave das secções (só com JavaScript ativo) */
 .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
 .js .reveal.is-in { opacity: 1; transform: none; }
@@ -412,4 +420,5 @@ select:focus, input:focus, textarea:focus { border-color: var(--gold); outline: 
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .js .reveal { opacity: 1; transform: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
