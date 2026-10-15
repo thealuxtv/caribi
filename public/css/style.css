@@ -239,7 +239,24 @@ select:focus, input:focus, textarea:focus { border-color: var(--gold); outline: 
 .back { display: inline-flex; gap: .6rem; color: var(--muted); text-decoration: none; margin-bottom: 2rem; font: 500 .72rem/1 var(--body); letter-spacing: .22em; text-transform: uppercase; transition: color .3s var(--ease), gap .3s var(--ease); }
 .back:hover { color: var(--gold-soft); gap: .9rem; }
 .vehicle-top { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; }
-.gallery-main { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); }
+.gallery-main { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); }
+.gallery-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  display: grid; place-items: center; width: 3rem; height: 3rem; padding: 0; cursor: pointer;
+  background: rgba(7, 6, 5, .55); border: 1px solid var(--line-strong); border-radius: 50%; color: var(--gold-soft);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: background-color .3s var(--ease), border-color .3s var(--ease);
+}
+.gallery-nav:hover { background: rgba(7, 6, 5, .8); border-color: var(--gold); }
+.gallery-nav svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.gallery-nav.prev { left: 1rem; }
+.gallery-nav.next { right: 1rem; }
+.gallery-count {
+  position: absolute; right: 1rem; bottom: 1rem; margin: 0; padding: .45rem .7rem;
+  background: rgba(7, 6, 5, .55); border: 1px solid var(--line); color: var(--text);
+  font: 500 .7rem/1 var(--body); letter-spacing: .18em; font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
 .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
 .gallery-thumbs { list-style: none; padding: 0; margin: .9rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: .6rem; }
 .gallery-thumbs button { padding: 0; border: 1px solid transparent; background: none; cursor: pointer; aspect-ratio: 4 / 3; overflow: hidden; width: 100%; opacity: .5; transition: opacity .3s var(--ease), border-color .3s var(--ease); }
@@ -417,6 +434,10 @@ select:focus, input:focus, textarea:focus { border-color: var(--gold); outline: 
   .filters select { min-width: 0; }
   .actions .btn { flex: 1 1 100%; }
   .dossier-head { flex-direction: column; align-items: flex-start; }
+  .gallery-nav { width: 2.5rem; height: 2.5rem; }
+  .gallery-nav.prev { left: .6rem; }
+  .gallery-nav.next { right: .6rem; }
+  .gallery-count { right: .6rem; bottom: .6rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

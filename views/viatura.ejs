@@ -9,6 +9,11 @@
       <% if (car.fotos.length) { %>
         <div class="gallery-main">
           <img id="gallery-main" src="/uploads/<%= car.fotos[0] %>" alt="<%= carTitle(car) %>, fotografia 1 de <%= car.fotos.length %>">
+          <% if (car.fotos.length > 1) { %>
+          <button type="button" class="gallery-nav prev" aria-label="Fotografia anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="gallery-nav next" aria-label="Fotografia seguinte"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          <p class="gallery-count" aria-live="polite"><span>1</span> / <%= car.fotos.length %></p>
+          <% } %>
         </div>
         <% if (car.fotos.length > 1) { %>
         <ul class="gallery-thumbs">

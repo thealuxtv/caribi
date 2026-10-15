@@ -9,14 +9,42 @@ if (toggle && nav) {
   });
 }
 
-// Galeria da viatura
-const main = document.getElementById('gallery-main');
-document.querySelectorAll('.gallery-thumbs button').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    main.src = btn.dataset.src;
-    main.alt = btn.dataset.alt;
-    document.querySelectorAll('.gallery-thumbs button').forEach((b) => b.removeAttribute('aria-current'));
+// Galeria da viatura: miniaturas, setas, teclado (← →) e deslizar no telemóvel
+document.querySelectorAll('.gallery').forEach((g) => {
+  const img = g.querySelector('.gallery-main img');
+  const thumbs = [...g.querySelectorAll('.gallery-thumbs button')];
+  if (!img || thumbs.length < 2) return;
+  const contador = g.querySelector('.gallery-count span');
+  let atual = Math.max(0, thumbs.findIndex((b) => b.hasAttribute('aria-current')));
+
+  const mostrar = (i) => {
+    atual = (i + thumbs.length) % thumbs.length;
+    const btn = thumbs[atual];
+    img.src = btn.dataset.src;
+    img.alt = btn.dataset.alt;
+    thumbs.forEach((b) => b.removeAttribute('aria-current'));
     btn.setAttribute('aria-current', 'true');
+    if (contador) contador.textContent = atual + 1;
+  };
+
+  thumbs.forEach((b, i) => b.addEventListener('click', () => mostrar(i)));
+  g.querySelector('.gallery-nav.prev')?.addEventListener('click', () => mostrar(atual - 1));
+  g.querySelector('.gallery-nav.next')?.addEventListener('click', () => mostrar(atual + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (g.offsetParent === null || /input|select|textarea/i.test(document.activeElement?.tagName)) return;
+    if (e.key === 'ArrowLeft') mostrar(atual - 1);
+    if (e.key === 'ArrowRight') mostrar(atual + 1);
+  });
+
+  let x0 = null;
+  const area = g.querySelector('.gallery-main');
+  area.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  area.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) mostrar(atual + (dx < 0 ? 1 : -1));
+    x0 = null;
   });
 });
 
