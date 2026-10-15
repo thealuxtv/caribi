@@ -2,13 +2,18 @@
 <%- include('partials/header') %>
 
 <div class="wrap vehicle">
-  <a class="back" href="/viaturas">Voltar às viaturas</a>
+  <a class="back" href="/viaturas"><span aria-hidden="true">←</span> Voltar às viaturas</a>
 
   <div class="vehicle-top">
     <div class="gallery">
       <% if (car.fotos.length) { %>
         <div class="gallery-main">
           <img id="gallery-main" src="/uploads/<%= car.fotos[0] %>" alt="<%= carTitle(car) %>, fotografia 1 de <%= car.fotos.length %>">
+          <% if (car.fotos.length > 1) { %>
+          <button type="button" class="gallery-nav prev" aria-label="Fotografia anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="gallery-nav next" aria-label="Fotografia seguinte"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          <p class="gallery-count" aria-live="polite"><span>1</span> / <%= car.fotos.length %></p>
+          <% } %>
         </div>
         <% if (car.fotos.length > 1) { %>
         <ul class="gallery-thumbs">
@@ -48,10 +53,11 @@
     </aside>
   </div>
 
-  <section class="dossier" aria-labelledby="ficha-titulo">
+  <section class="dossier reveal" aria-labelledby="ficha-titulo">
     <header class="dossier-head">
       <img class="brand-logo" src="/img/logo.png" alt="" width="40" height="40">
       <div>
+        <p class="eyebrow">Documento Caribi</p>
         <h2 id="ficha-titulo">Ficha de seleção</h2>
         <p>O que precisas de saber sobre esta viatura, num só sítio.</p>
       </div>

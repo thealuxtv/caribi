@@ -3,7 +3,10 @@
 
 <section class="hero">
   <div class="wrap hero-inner">
-    <h1>Not new.<br>Just better chosen.</h1>
+    <div class="hero-title">
+      <p class="eyebrow">Automóveis premium selecionados</p>
+      <h1>Not new.<br><em>Just better chosen.</em></h1>
+    </div>
     <div class="hero-side">
       <p class="lead">Automóveis premium usados, escolhidos um a um. Poucas viaturas, todas com histórico claro e estado verificado, explicadas ao detalhe antes de decidir.</p>
       <div class="actions">
@@ -12,10 +15,13 @@
       </div>
     </div>
   </div>
+  <div class="wrap hero-foot">
+    <span><%= config.horario %></span>
+  </div>
 </section>
 
 <% if (destaque) { %>
-<section class="featured" aria-labelledby="destaque-titulo">
+<section class="featured reveal" aria-labelledby="destaque-titulo">
   <div class="wrap featured-grid">
     <a class="featured-media" href="/viaturas/<%= destaque.slug %>" tabindex="-1" aria-hidden="true">
       <% if (destaque.fotos.length) { %>
@@ -25,7 +31,7 @@
       <% } %>
     </a>
     <div class="featured-info">
-      <p class="featured-status"><%= destaque.estado === 'brevemente' ? 'Chega em breve' : 'Em destaque' %></p>
+      <p class="eyebrow"><%= destaque.estado === 'brevemente' ? 'Chega em breve' : 'Em destaque' %></p>
       <h2 id="destaque-titulo"><%= carTitle(destaque) %></h2>
       <% if (destaque.versao) { %><p class="versao"><%= destaque.versao %></p><% } %>
       <dl class="mini-specs">
@@ -41,22 +47,26 @@
 </section>
 <% } %>
 
-<section class="process" aria-labelledby="processo-titulo">
+<section class="process reveal" aria-labelledby="processo-titulo">
   <div class="wrap">
-    <h2 id="processo-titulo">Como escolhemos cada viatura</h2>
+    <p class="eyebrow">O método Caribi</p>
+    <h2 id="processo-titulo">Como escolhemos <em>cada viatura</em></h2>
     <ol class="steps">
       <li><h3>Origem</h3><p>Só aceitamos viaturas com histórico de manutenção e proveniência que conseguimos confirmar.</p></li>
-      <li><h3>Inspeção</h3><p>Verificamos mecânica, eletrónica, carroçaria e interior antes de qualquer viatura entrar em stock.</p></li>
+      <li><h3>Inspeção</h3><p>Verificamos mecânica, eletrónica, carroçaria e interior antes de pôr qualquer viatura à venda.</p></li>
       <li><h3>Preparação</h3><p>Tratamos do que for preciso para que o carro chegue até ti como deve estar.</p></li>
       <li><h3>Entrega</h3><p>Explicamos tudo o que fizemos e entregamos a documentação completa.</p></li>
     </ol>
   </div>
 </section>
 
-<section class="stock" aria-labelledby="stock-titulo">
+<section class="stock reveal" aria-labelledby="stock-titulo">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="stock-titulo">Em stock</h2>
+      <div>
+        <p class="eyebrow">A coleção</p>
+        <h2 id="stock-titulo">À venda</h2>
+      </div>
       <a class="link" href="/viaturas">Ver todas as viaturas</a>
     </div>
     <% if (outras.length) { %>
@@ -65,7 +75,7 @@
       </div>
     <% } else { %>
       <div class="empty">
-        <p>O stock está a ser renovado. Diz-nos o que procuras e avisamos-te quando chegar.</p>
+        <p>De momento não há viaturas à venda. Diz-nos o que procuras e avisamos-te quando houver.</p>
         <a class="btn btn-line" href="<%= waLink('Olá! Procuro uma viatura e gostava de ser avisado quando tiverem algo do género.') %>" target="_blank" rel="noopener">Dizer o que procuro</a>
       </div>
     <% } %>
@@ -74,7 +84,7 @@
 
 <section class="cta-band">
   <div class="wrap cta-inner">
-    <p>Procuras um modelo específico? Conta-nos o que tens em mente.</p>
+    <p>Procuras um modelo específico? <em>Conta-nos o que tens em mente.</em></p>
     <a class="btn btn-gold" href="<%= waLink('Olá! Procuro um modelo específico.') %>" target="_blank" rel="noopener">Falar por WhatsApp</a>
   </div>
 </section>

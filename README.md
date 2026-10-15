@@ -27,10 +27,9 @@ Se o preço ficar vazio, o site mostra «Preço sob consulta».
 
 ## Antes de publicar
 
-1. Preenche os dados reais em `config.js`: telefone, WhatsApp, email, razão social, NIF e morada.
-2. Confirma a entidade de resolução alternativa de litígios (RAL) em `config.js` no Portal do Consumidor.
-3. Revê o texto da política de privacidade em `views/privacidade.ejs`.
-4. Define `NODE_ENV=production`, `SITE_URL` com o domínio final e um `SESSION_SECRET` longo e aleatório.
+1. Preenche os contactos reais em `config.js`: telefone, WhatsApp e email.
+2. Revê o texto da política de privacidade em `views/privacidade.ejs`.
+3. Define `NODE_ENV=production`, `SITE_URL` com o domínio final e um `SESSION_SECRET` longo e aleatório.
 
 ## Alojamento
 
