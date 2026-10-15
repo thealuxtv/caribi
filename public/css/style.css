@@ -239,8 +239,8 @@ select:focus, input:focus, textarea:focus { border-color: var(--gold); outline: 
 .back { display: inline-flex; gap: .6rem; color: var(--muted); text-decoration: none; margin-bottom: 2rem; font: 500 .72rem/1 var(--body); letter-spacing: .22em; text-transform: uppercase; transition: color .3s var(--ease), gap .3s var(--ease); }
 .back:hover { color: var(--gold-soft); gap: .9rem; }
 .vehicle-top { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; }
-.gallery-main { aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); }
-.gallery-main img { width: 100%; height: 100%; object-fit: contain; }
+.gallery-main { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); }
+.gallery-main img { width: 100%; height: 100%; object-fit: cover; }
 .gallery-thumbs { list-style: none; padding: 0; margin: .9rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: .6rem; }
 .gallery-thumbs button { padding: 0; border: 1px solid transparent; background: none; cursor: pointer; aspect-ratio: 4 / 3; overflow: hidden; width: 100%; opacity: .5; transition: opacity .3s var(--ease), border-color .3s var(--ease); }
 .gallery-thumbs button[aria-current], .gallery-thumbs button:hover { opacity: 1; border-color: var(--gold); }
