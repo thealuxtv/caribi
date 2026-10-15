@@ -5,24 +5,24 @@
   <div class="wrap"><h1>Política de privacidade</h1></div>
 </section>
 
-<section class="wrap prose reveal">
-  <p><em>Revê este texto com os dados reais da empresa antes de publicar o site.</em></p>
-
-  <h2>Quem é responsável pelos dados</h2>
-  <p><%= config.razaoSocial %>, NIF <%= config.nif %>, com sede em <%= config.morada %>. Contacto: <a href="mailto:<%= config.email %>"><%= config.email %></a>.</p>
+<section class="wrap">
+<div class="prose reveal">
+  <h2>Quem gere este site</h2>
+  <p>A Caribi é um projeto particular para divulgar a venda de viaturas. Para qualquer questão sobre os teus dados, contacta <a href="mailto:<%= config.email %>"><%= config.email %></a>.</p>
 
   <h2>Que dados tratamos</h2>
   <p>Este site não tem formulários nem contas de utilizador. Só tratamos os dados que nos envias quando nos contactas por WhatsApp, telefone ou email (por exemplo, nome, contacto e a viatura em que estás interessado), com o objetivo de responder ao teu pedido.</p>
 
   <h2>Cookies</h2>
-  <p>As páginas públicas deste site não usam cookies de análise nem de publicidade. Existe apenas um cookie técnico na área reservada de gestão, usado pela equipa da Caribi para iniciar sessão.</p>
+  <p>As páginas públicas deste site não usam cookies de análise nem de publicidade. Existe apenas um cookie técnico na área reservada de gestão, usado apenas para iniciar sessão.</p>
   <p>As ligações para WhatsApp e Instagram levam-te para serviços externos, com as suas próprias políticas de privacidade.</p>
 
   <h2>Durante quanto tempo guardamos os dados</h2>
-  <p>Apenas o tempo necessário para responder ao teu contacto ou cumprir obrigações legais, nomeadamente fiscais, em caso de venda.</p>
+  <p>Apenas o tempo necessário para responder ao teu contacto e, se comprares uma viatura, para tratar da venda.</p>
 
   <h2>Os teus direitos</h2>
   <p>Podes pedir acesso, retificação, apagamento ou limitação do tratamento dos teus dados através de <a href="mailto:<%= config.email %>"><%= config.email %></a>. Tens também o direito de apresentar reclamação à Comissão Nacional de Proteção de Dados (<a href="https://www.cnpd.pt" target="_blank" rel="noopener">cnpd.pt</a>).</p>
+</div>
 </section>
 
 <%- include('partials/footer') %>

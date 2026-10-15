@@ -92,7 +92,7 @@ app.get('/viaturas', (req, res) => {
 
   res.render('viaturas', {
     title: 'Viaturas',
-    description: 'Stock atual de automóveis premium selecionados pela Caribi.',
+    description: 'Automóveis premium selecionados à venda na Caribi.',
     lista, marcas, combustiveis, filtros: { marca, combustivel, ordem }, total: todas.length,
   });
 });
